@@ -27,7 +27,7 @@ def parse_lemma(lemma):
     try:
         dict_term_elm = lemma.find_class('dictTerm')[0]
     except:
-        continue
+        pass
 
     word_type_elm = lemma.find_class('tag_wordtype')[0]
     trans_elms = lemma.find_class('tag_trans')

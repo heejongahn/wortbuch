@@ -13,11 +13,11 @@ const prod = [
 ];
 
 module.exports = {
-  context: `${__dirname}/static`,
+  context: `${__dirname}/wortbuch/static/js`,
   entry: './main.js',
   output: {
-    path: `${__dirname}/public/build`,
-    publicPath: '/build/',
+    path: `${__dirname}/wortbuch/static/public/build`,
+    publicPath: '/public/build/',
     filename: '_bundle.js'
   },
   devtool: 'source-map',

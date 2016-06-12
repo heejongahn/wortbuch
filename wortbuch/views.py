@@ -1,9 +1,10 @@
+from flask import render_template
 from wortbuch import app
 from lxml import html
 
 @app.route('/')
 def about():
-    return ('Hello, wortbuch!')
+    return render_template('main.html')
 
 
 @app.route('/translate/<origin>/<word>')

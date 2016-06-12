@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
+import '../css/main.styl';
+
 let AppContainer = React.createClass({
   render: function() {
     return (

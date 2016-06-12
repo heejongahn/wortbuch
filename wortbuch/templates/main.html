@@ -1,10 +1,22 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name='description' content="Your English-Deutsch Wordbook">
     <title>Wortbuch</title>
   </head>
   <body>
+    <div class="pure-menu pure-menu-horizontal">
+      <a href="#" class="pure-menu-heading pure-menu-link">wortbuch</a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Learn</a></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link">New words</a></li>
+        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Staticstics</a></li>
+      </ul>
+    </div>
     <div id="main"></div>
-  <script src="{{ url_for('static', filename='public/build/_bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='public/build/_bundle.js') }}"></script>
   </body>
 </html>

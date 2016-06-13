@@ -20,6 +20,9 @@ module.exports = {
     publicPath: '/public/build/',
     filename: '_bundle.js'
   },
+  devServer: {
+    historyApiFallback: true
+  },
   plugins: process.env.NODE_ENV !== 'production' ? plugs : plugs.concat(prod),
   module: {
     loaders: [

@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 }
 
+
 class About extends React.Component {
   render() {
     return (
@@ -42,6 +43,7 @@ class About extends React.Component {
     );
   }
 }
+
 
 class Dashboard extends React.Component {
   render() {
@@ -51,6 +53,7 @@ class Dashboard extends React.Component {
   }
 }
 
+
 class Learn extends React.Component {
   render() {
     return (
@@ -59,14 +62,52 @@ class Learn extends React.Component {
   }
 }
 
-class Translate extends React.Component {
+
+class TranslateLayout extends React.Component {
+  costructor() {
+    super();
+    this.state.words = ["apple", "banana"];
+  },
   render() {
     return (
-      <div className="translation">
+      <div id="translation">
+        <TranslateForm />
+        <TranslateResults words={this.state.words} />
+      </div>
+    );
+  }
+}
+
+
+class TranslateForm extends React.Component {
+  render() {
+    return (
+      <div>
         <input type="text" className="input"></input>
         <a className="btn">Translate</a>
       </div>
     );
+  }
+}
+
+
+class TranslateResults extends React.Component {
+  render() {
+    let words = this.props.words;
+
+    return (
+      <ol>
+        {words.map(function(word) {
+          return <TranslateResult word={word} />
+        })}
+      </ol>
+    )
+  }
+}
+
+class TranslateResult extends React.Component {
+  render() {
+    return <li>{this.props.word}</li>
   }
 }
 
@@ -76,7 +117,7 @@ ReactDom.render(
       <IndexRoute component={About}/>
       <Route path="dashboard" component={Dashboard} />
       <Route path="learn" component={Learn} />
-      <Route path="translate" component={Translate} />
+      <Route path="translate" component={TranslateLayout} />
     </Route>
   </Router>,
   document.getElementById('main')

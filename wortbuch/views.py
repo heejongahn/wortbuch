@@ -2,17 +2,20 @@ from flask import render_template
 from wortbuch import app
 from lxml import html
 
-@app.route('/')
-def about():
+# Catch-all view function for client-side rendering
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
     return render_template('main.html')
 
 
-@app.route('/translate/<origin>/<word>')
+# Translation API using linguee.com
+@app.route('/linguee/<origin>/<word>')
 def translate(origin, word):
     url = 'http://www.linguee.com/german-english/search?source={}&query={}'.\
             format(origin, word)
 
-    lemmas = get_lemmas(url)
+    lemmas = get_lemmas_from_linguee(url)
 
     words = []
     for lemma in lemmas:

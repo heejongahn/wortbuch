@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, jsonify
 from wortbuch import app
 from lxml import html
 
@@ -22,7 +22,7 @@ def translate(origin, word):
         word = parse_lemma(lemma)
         words.append(word)
 
-    return str(words)
+    return jsonify(words=words)
 
 
 def parse_lemma(lemma):

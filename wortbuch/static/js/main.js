@@ -64,10 +64,10 @@ class Learn extends React.Component {
 
 
 class TranslateLayout extends React.Component {
-  costructor() {
+  constructor() {
     super();
-    this.state.words = ["apple", "banana"];
-  },
+    this.state = { words: ["apple", "banana"] };
+  }
   render() {
     return (
       <div id="translation">
@@ -82,10 +82,10 @@ class TranslateLayout extends React.Component {
 class TranslateForm extends React.Component {
   render() {
     return (
-      <div>
-        <input type="text" className="input"></input>
-        <a className="btn">Translate</a>
-      </div>
+      <form className="pure-form">
+        <input type="text" className="input pure-input-rounded"></input>
+        <input type="submit" className="pure-button" value="Translate"></input>
+      </form>
     );
   }
 }

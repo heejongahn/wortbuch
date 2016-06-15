@@ -51,6 +51,10 @@ def parse_lemma(lemma):
 
 def get_lemmas_from_linguee(url):
     tree = html.parse(url)
-    exact = tree.getroot().find_class('exact')[0]
+    exact = tree.getroot().find_class('exact')
 
-    return exact.find_class('lemma')
+    if exact:
+        return exact.find_class('lemma')
+
+    else:
+        return []

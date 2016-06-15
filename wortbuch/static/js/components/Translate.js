@@ -10,7 +10,15 @@ class TranslateLayout extends React.Component {
     e.preventDefault();
 
     let query = document.getElementById("translate-query");
-    this.setState({ words: [`Search result for ${query.value}`] });
+
+    fetch(`/linguee/english/${query.value}`)
+    .then(response => {
+      return response.json();
+    })
+    .then(results => {
+      this.setState({ words: [`Search result for ${results['words']}`] });
+    });
+
     query.value = "";
   }
   render() {

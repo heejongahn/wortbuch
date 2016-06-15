@@ -12,8 +12,6 @@ class TranslateLayout extends React.Component {
     let query = document.getElementById("translate-query");
     this.setState({ words: [`Search result for ${query.value}`] });
     query.value = "";
-
-    return false;
   }
   render() {
     return (
@@ -31,7 +29,7 @@ class TranslateForm extends React.Component {
     return (
       <form className="pure-form" onSubmit={this.props.translate}>
         <input type="text" id="translate-query" className="input pure-input-rounded"></input>
-        <a href="#" className="pure-button" onClick={this.props.translate}>Translate</a>
+        <a className="pure-button" onClick={this.props.translate}>Translate</a>
       </form>
     );
   }

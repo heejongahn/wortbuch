@@ -3,12 +3,22 @@ import React from 'react';
 class TranslateLayout extends React.Component {
   constructor() {
     super();
-    this.state = { words: ["apple", "banana"] };
+    this.state = { words: ["Nothing now"] };
+    this.translate = this.translate.bind(this);
+  }
+  translate(e) {
+    e.preventDefault();
+
+    let query = document.getElementById("translate-query");
+    this.setState({ words: [`Search result for ${query.value}`] });
+    query.value = "";
+
+    return false;
   }
   render() {
     return (
       <div id="translation">
-        <TranslateForm />
+        <TranslateForm translate={this.translate} />
         <TranslateResults words={this.state.words} />
       </div>
     );
@@ -19,9 +29,9 @@ class TranslateLayout extends React.Component {
 class TranslateForm extends React.Component {
   render() {
     return (
-      <form className="pure-form">
-        <input type="text" className="input pure-input-rounded"></input>
-        <input type="submit" className="pure-button" value="Translate"></input>
+      <form className="pure-form" onSubmit={this.props.translate}>
+        <input type="text" id="translate-query" className="input pure-input-rounded"></input>
+        <a href="#" className="pure-button" onClick={this.props.translate}>Translate</a>
       </form>
     );
   }

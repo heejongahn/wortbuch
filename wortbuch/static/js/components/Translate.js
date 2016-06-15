@@ -3,7 +3,7 @@ import React from 'react';
 class TranslateLayout extends React.Component {
   constructor() {
     super();
-    this.state = { words: ["Nothing now"] };
+    this.state = { results: ["Nothing now"] };
     this.translate = this.translate.bind(this);
   }
   translate(e) {
@@ -16,7 +16,7 @@ class TranslateLayout extends React.Component {
       return response.json();
     })
     .then(results => {
-      this.setState({ words: [`Search result for ${results['words']}`] });
+      this.setState({ results: [`Search result for ${results['results']}`] });
     });
 
     query.value = "";
@@ -25,7 +25,7 @@ class TranslateLayout extends React.Component {
     return (
       <div id="translation">
         <TranslateForm translate={this.translate} />
-        <TranslateResults words={this.state.words} />
+        <TranslateResults results={this.state.results} />
       </div>
     );
   }
@@ -46,12 +46,12 @@ class TranslateForm extends React.Component {
 
 class TranslateResults extends React.Component {
   render() {
-    let words = this.props.words;
+    let results = this.props.results;
 
     return (
       <ol>
-        {words.map(function(word) {
-          return <TranslateResult word={word} />
+        {results.map(function(result) {
+          return <TranslateResult result={result} />
         })}
       </ol>
     )
@@ -61,7 +61,7 @@ class TranslateResults extends React.Component {
 
 class TranslateResult extends React.Component {
   render() {
-    return <li>{this.props.word}</li>
+    return <li>{this.props.result}</li>
   }
 }
 

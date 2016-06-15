@@ -17,41 +17,37 @@ def translate(origin, word):
 
     lemmas = get_lemmas_from_linguee(url)
 
-    words = []
+    results = []
     for lemma in lemmas:
-        word = parse_lemma(lemma)
-        words.append(word)
+        result = parse_lemma(lemma)
+        results.append(result)
 
-    return jsonify(words=words)
+    return jsonify(results=results)
 
 
 def parse_lemma(lemma):
-    word = {'translations': []}
+    result = {'translations': []}
 
     try:
         dict_term_elm = lemma.find_class('dictTerm')[0]
+        result['dict_term'] = dict_term_elm.text
     except:
-        pass
+        return {}
 
     word_type_elm = lemma.find_class('tag_wordtype')[0]
-    trans_elms = lemma.find_class('tag_trans')
-
-    word['dict_term'] = dict_term_elm.text
     word_type = word_type_elm.text.split(',\xa0')
+    result['word_class'] = word_type[0]
 
-    word['word_class'] = word_type[0]
-    if len(word_type) > 1:
-        word['gender'] = word_type[1]
-
+    trans_elms = lemma.find_class('tag_trans')
     for trans_elm in trans_elms:
         trans_elm = list(trans_elm)
 
         translation = {}
         translation['meaning'] = trans_elm[0].text_content().split()[-1]
         translation['tag'] = trans_elm[1].text
-        word['translations'].append(translation)
+        result['translations'].append(translation)
 
-    return word
+    return result
 
 def get_lemmas_from_linguee(url):
     tree = html.parse(url)

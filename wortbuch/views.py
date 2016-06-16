@@ -54,7 +54,7 @@ def get_lemmas_from_linguee(url):
     exact = tree.getroot().find_class('exact')
 
     if exact:
-        return exact.find_class('lemma')
+        return exact[0].find_class('lemma')
 
     else:
         return []

@@ -16,4 +16,4 @@ CsrfProtect(app)
 
 db = SQLAlchemy(app)
 
-from wortbuch import views
+from wortbuch import views, models

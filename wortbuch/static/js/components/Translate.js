@@ -32,54 +32,46 @@ class TranslateLayout extends React.Component {
 }
 
 
-class TranslateForm extends React.Component {
-  render() {
-    return (
-      <form className="pure-form" onSubmit={this.props.translate}>
-        <input type="text" id="translate-query" className="input pure-input-rounded"></input>
-        <a className="pure-button" onClick={this.props.translate}>Translate</a>
-      </form>
-    );
-  }
+const TranslateForm = ({ translate }) => {
+  return (
+    <form className="pure-form" onSubmit={translate}>
+      <input type="text" id="translate-query" className="input pure-input-rounded"></input>
+      <a className="pure-button" onClick={translate}>Translate</a>
+    </form>
+  );
 }
 
 
-class TranslateResults extends React.Component {
-  render() {
-    let results = this.props.results;
-
-    if (results.length === 0) {
-      return <h1>No result</h1>;
-    }
-
-    return (
-      <div>
-        {results.map(result => {
-          let [dictTerm, translations] = [result.dict_term, result.translations];
-
-          return (
-            <div>
-              <h1>{dictTerm}</h1>
-              {translations.map(t => {
-                  return <TranslateResult meaning={t.meaning} tag={t.tag}/>;
-                }
-              )}
-            </div>
-            );
-          })
-        }
-      </div>
-    );
+const TranslateResults = ({ results }) => {
+  if (results.length === 0) {
+    return <h1>No result</h1>;
   }
+
+  return (
+    <div>
+      {results.map(result => {
+        let [dictTerm, translations] = [result.dict_term, result.translations];
+
+        return (
+          <div>
+            <h1>{dictTerm}</h1>
+            {translations.map(t => {
+                return <TranslateResult meaning={t.meaning} tag={t.tag}/>;
+              }
+            )}
+          </div>
+          );
+        })
+      }
+    </div>
+  );
 }
 
 
-class TranslateResult extends React.Component {
-  render() {
-    return (
-      <p>{`${this.props.meaning} (${this.props.tag})`}</p>
-    );
-  }
+const TranslateResult = ({ meaning, tag }) => {
+  return (
+    <p>{`${meaning} (${tag})`}</p>
+  );
 }
 
 

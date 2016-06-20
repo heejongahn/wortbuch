@@ -1,9 +1,11 @@
 import React from 'react';
 
 class TranslateLayout extends React.Component {
+  getInitialState() {
+    return { results: [] };
+  }
   constructor() {
     super();
-    this.state = { results: [] };
     this.translate = this.translate.bind(this);
   }
   translate(e) {

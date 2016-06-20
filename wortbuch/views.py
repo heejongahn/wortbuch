@@ -1,12 +1,55 @@
-from flask import render_template, jsonify
-from wortbuch import app
+from flask import render_template, jsonify, request
+from wortbuch import app, db, lm
+from wortbuch.models import User, Wordbook, Word
 from lxml import html
+
+from flask.ext.login import login_user, logout_user, current_user
 
 # Catch-all view function for client-side rendering
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template('main.html')
+
+
+# Login
+@lm.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+
+    try:
+        u = User(data.username, data.password)
+        db.session.add(u)
+        db.session.save()
+        return 'okay'
+
+    except:
+        return 'not okay'
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+
+    try:
+        user = User.query.filter_by(username=data.username).first_or_404()
+    except:
+        return 'no such user'
+
+    if user.is_correct_password(data.password):
+        login_user(user)
+        return 'ok'
+
+    else:
+        return 'wrong password'
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return 'ok'
 
 
 # Translation API using linguee.com
